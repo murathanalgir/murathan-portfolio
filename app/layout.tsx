@@ -1,37 +1,45 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Providers from "@/components/providers";
+import type { Metadata } from 'next'
+import { Inter, Playfair_Display } from 'next/font/google'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { cn } from '@/lib/utils'
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import './globals.css'
+import Providers from '@/components/providers'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif'
+})
 
 export const metadata: Metadata = {
-  title: "murathanalgir Portfolio",
-  description: "Made with ❤",
-};
+  title: 'Murathan ALGIR',
+  description: 'Created with ❤ by Murathan ALGIR',
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={cn(
+          'flex min-h-screen flex-col font-sans antialiased',
+          inter.variable,
+          playfair.variable
+        )}
+        >
+        <noSSR />
         <Providers>
-        {children}
+          <Header />
+          <main className='grow'>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
-  );
+  )
 }
