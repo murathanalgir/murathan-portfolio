@@ -1,3 +1,5 @@
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import Image from 'next/image'
 // import authorImage from '@/public/images/authors/hamed.png'
 
