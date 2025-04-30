@@ -7,6 +7,7 @@ import './globals.css'
 import Providers from '@/components/providers'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import dynamic from 'next/dynamic'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -18,12 +19,12 @@ export const metadata: Metadata = {
   title: 'Murathan ALGIR',
   description: 'Created with ❤ by Murathan ALGIR',
 }
-
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
   return (
     <html lang='en' suppressHydrationWarning>
       <body
@@ -33,12 +34,14 @@ export default function RootLayout({
           playfair.variable
         )}
         >
+          <div>
         <noSSR />
         <Providers>
           <Header />
           <main className='grow'>{children}</main>
           <Footer />
         </Providers>
+        </div>
       </body>
     </html>
   )
