@@ -35,7 +35,6 @@ export default function RootLayout({
         )}
         >
           <div>
-        <noSSR />
         <Providers>
           <Header />
           <main className='grow'>{children}</main>
