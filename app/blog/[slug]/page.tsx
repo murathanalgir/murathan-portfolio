@@ -1,4 +1,5 @@
-// app/blog/[slug]/page.tsx
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import type { PageProps } from 'next/types'
 import { Metadata } from 'next'
 import { format } from 'date-fns'
@@ -9,12 +10,12 @@ import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
 
 type Params = { slug: string }
 
-// 1) Static parametreleri bildiriyoruz
+
 export function generateStaticParams(): Params[] {
   return getAllPostsMeta().map(post => ({ slug: post.slug }))
 }
 
-// 2) Dinamik metadata (opsiyonel)
+
 export async function generateMetadata({
   params
 }: PageProps<Params>): Promise<Metadata> {
@@ -25,7 +26,6 @@ export async function generateMetadata({
   }
 }
 
-// 3) Sayfa component’i: PageProps<Params> ile tip uyumu sağlandı
 export default async function PostPage({
   params
 }: PageProps<Params>) {
