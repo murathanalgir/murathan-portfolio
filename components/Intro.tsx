@@ -1,4 +1,4 @@
-// components/ui/intro.tsx
+
 import Image from 'next/image'
 import authorImage from '@/public/images/authors/murat.jpg'
 

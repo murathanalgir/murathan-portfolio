@@ -1,4 +1,4 @@
-// lib/posts.ts
+
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -12,7 +12,7 @@ export type PostMeta = {
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
 
-// Tüm post’ların meta verilerini oku ve tarihe göre sırala
+
 export function getAllPostsMeta(): PostMeta[] {
   const fileNames = fs
     .readdirSync(postsDirectory)
@@ -35,7 +35,7 @@ export function getAllPostsMeta(): PostMeta[] {
   )
 }
 
-// Belirli bir slug için post meta + içerik döndür
+
 export function getPostBySlug(
   slug: string
 ): { meta: Omit<PostMeta, 'slug'>; content: string } {

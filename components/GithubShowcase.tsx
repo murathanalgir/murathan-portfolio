@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// app/components/GithubShowcase.tsx
+
 import Link from 'next/link'
 import axios from 'axios'
 import { format } from 'date-fns'
@@ -7,17 +7,16 @@ import { format } from 'date-fns'
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME!
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!
 
-// Next.js’in ISR (Incremental Static Regeneration) için revalidate süresi
+
 export const revalidate = 3600  // saniye cinsinden
 
-// Server-side olarak en güncel 6 repo’yu çek
 async function fetchLatestRepos() {
   const url = `https://api.github.com/users/${GITHUB_USERNAME}/repos`
   const { data } = await axios.get(url, {
     params: { per_page: 6, sort: 'updated' },
     headers: {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
-      Accept: 'application/vnd.github.mercy-preview+json' // topics için gerekli
+      Accept: 'application/vnd.github.mercy-preview+json'
     }
   })
   return data

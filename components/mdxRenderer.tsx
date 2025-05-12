@@ -1,4 +1,4 @@
-// components/mdxRenderer.tsx
+
 'use client'
 
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'

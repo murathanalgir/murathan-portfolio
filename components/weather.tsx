@@ -19,7 +19,6 @@ export default function WeatherPage() {
             units: 'm',
           },
         });
-        // API hata döndüyse yakala
         if ((response.data as any).error) {
           throw new Error((response.data as any).error.info);
         }

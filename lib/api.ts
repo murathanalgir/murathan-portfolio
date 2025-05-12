@@ -1,4 +1,4 @@
-// lib/weatherApi.ts
+
 import axios from 'axios';
 
 const apiKey = process.env.WEATHER_API;

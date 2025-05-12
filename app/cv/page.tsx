@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// app/cv/page.tsx
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { format } from 'date-fns'
