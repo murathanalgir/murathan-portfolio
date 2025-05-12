@@ -77,10 +77,8 @@ export default async function GithubShowcase() {
       </div>
 
       <div className="mt-12 text-center">
-        <Link legacyBehavior href={`https://github.com/${GITHUB_USERNAME}`}>
-          <a className="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition dark:bg-gray-700 dark:text-gray-200">
+        <Link className='inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition dark:bg-gray-700 dark:text-gray-200' href={`https://github.com/${GITHUB_USERNAME}`}>
             Find more on my GitHub
-          </a>
         </Link>
       </div>
     </section>
