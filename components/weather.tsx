@@ -12,7 +12,7 @@ export default function WeatherPage() {
   useEffect(() => {
     async function fetchWeather() {
       try {
-        const response = await axios.get('http://api.weatherstack.com/current', {
+        const response = await axios.get('https://api.weatherstack.com/current', {
           params: {
             access_key: '62b53b77faa36362c13285bfc2653169',
             query: 'Istanbul',
