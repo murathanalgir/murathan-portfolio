@@ -19,7 +19,7 @@ export default function BlogPage() {
             <Link
               href={`/blog/${post.slug}`}
               className="text-2xl font-semibold hover:underline"
-            >
+              legacyBehavior>
               {post.title}
             </Link>
             <time className="block text-sm text-gray-500 dark:text-gray-400">
@@ -43,5 +43,5 @@ export default function BlogPage() {
         ))}
       </ul>
     </section>
-  )
+  );
 }
