@@ -1,47 +1,44 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // app/blog/[slug]/page.tsx
+import { Metadata } from 'next'
+import { format } from 'date-fns'
+import { serialize } from 'next-mdx-remote/serialize'
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import MdxRenderer from '@/components/mdxRenderer'
+import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
 
-type PageProps<TParams> = { params: TParams }
+type Params = { slug: string }
 
- import type { Metadata } from 'next'
- import { format } from 'date-fns'
- import { serialize } from 'next-mdx-remote/serialize'
- import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
- import MdxRenderer from '@/components/mdxRenderer'
- // eslint-disable-next-line @typescript-eslint/no-unused-vars
- import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
+// 1) Hangi slug’ların static generate edileceğini bildiriyoruz
+export function generateStaticParams(): Params[] {
+  return getAllPostsMeta().map(post => ({ slug: post.slug }))
+}
 
-
- type Params = { slug: string }
-
- // Static parametreleri bildiriyoruz
- export function generateStaticParams(): Params[] {
-   return getAllPostsMeta().map(post => ({ slug: post.slug }))
- }
-
- // Dinamik metadata (opsiyonel)
- export async function generateMetadata({
+// 2) Dinamik metadata fonksiyonu
+export async function generateMetadata({
   params
-}: PageProps<Params>): Promise<Metadata> {
-   const { meta } = getPostBySlug(params.slug)
-   return {
-     title: meta.title,
-     description: `Blog post about ${meta.tags.join(', ')}`
-   }
- }
+}: { params: Params }): Promise<Metadata> {
+  const { meta } = getPostBySlug(params.slug)
+  return {
+    title: meta.title,
+    description: `Blog post about ${meta.tags.join(', ')}`
+  }
+}
 
+// 3) Sayfa component’i: params tipini inline verdik
 export default async function PostPage({
   params
-}: PageProps<Params>) {
-   const { meta, content } = getPostBySlug(params.slug)
-   const mdxSource: MDXRemoteSerializeResult = await serialize(content)
+}: { params: Params }) {
+  const { meta, content } = getPostBySlug(params.slug)
+  const mdxSource: MDXRemoteSerializeResult = await serialize(content)
 
-   return (
-     <article className="container mx-auto flex flex-col items-center justify-center min-h-screen px-4 py-16">
-       <h1>{meta.title}</h1>
-       <time className="block text-sm text-gray-500 dark:text-gray-400 mb-6">
-         {format(new Date(meta.date), 'LLL d, yyyy')}
-       </time>
-       <MdxRenderer source={mdxSource} />
-     </article>
-   )
+  return (
+    <article className="container mx-auto flex flex-col items-center justify-center min-h-screen px-4 py-16">
+      <h1>{meta.title}</h1>
+      <time className="block text-sm text-gray-500 dark:text-gray-400 mb-6">
+        {format(new Date(meta.date), 'LLL d, yyyy')}
+      </time>
+      <MdxRenderer source={mdxSource} />
+    </article>
+  )
 }
