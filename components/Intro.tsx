@@ -1,25 +1,25 @@
+// components/ui/intro.tsx
 import Image from 'next/image'
 import authorImage from '@/public/images/authors/murat.jpg'
 
-export default function Intro() {
+export default function intro() {
   return (
-    <section className='flex flex-col-reverse gap-x-10 gap-y-4 pb-24 md:flex-row md:items-center justify-center items-center'>
-      <div className='mt-2 flex-1 md:mt-0'>
-        <h1 className='title no-underline'>Hey, I&#39;m Murathan.</h1>
-        <p className='mt-3 font-light text-muted-foreground'>
-          I&#39;m a software engineer based in Istanbul,Turkey. I&#39;m
-          passionate about learning new technologies and sharing knowledge with
-          others.
+    <section className="container mx-auto flex flex-col-reverse items-center justify-center gap-x-10 gap-y-4 pb-24 md:flex-row">
+      <div className="mt-2 flex-1 md:mt-0 text-center md:text-left">
+        <h1 className="title">👋 Hey, I’m Murathan.</h1>
+        <p className="mt-3 font-light text-muted-foreground">
+          I’m a software engineer based in Istanbul, Turkey. I’m passionate about
+          learning new technologies and sharing knowledge with others.
         </p>
       </div>
-      <div className='relative'>
-         <Image
-          className='flex-1 rounded-lg grayscale'
+      <div className="relative">
+        <Image
           src={authorImage}
-          alt='Murathan ALGIR'
+          alt="Murathan Algir"
           width={175}
           height={175}
           priority
+          className="rounded-2xl grayscale object-cover"
         />
       </div>
     </section>
