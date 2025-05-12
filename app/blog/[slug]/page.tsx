@@ -1,43 +1,39 @@
 // app/blog/[slug]/page.tsx
+import type { PageProps } from 'next/types'
 import { Metadata } from 'next'
 import { format } from 'date-fns'
-import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
-import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import MdxRenderer from '@/components/mdxRenderer'
+import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
 
-type Props = { params: { slug: string } }
+type Params = { slug: string }
 
-// 1) Static parametreleri bildir
-export function generateStaticParams(): { slug: string }[] {
-  const posts: PostMeta[] = getAllPostsMeta()
-  return posts.map(post => ({ slug: post.slug }))
+// 1) Static parametreleri bildiriyoruz
+export function generateStaticParams(): Params[] {
+  return getAllPostsMeta().map(post => ({ slug: post.slug }))
 }
 
-// 2) Dinamik metadata (head title vs.) isteğe bağlı
-export async function generateMetadata({ params: { slug } }): Promise<Metadata> {
-  const { meta } = getPostBySlug(slug)
+// 2) Dinamik metadata (opsiyonel)
+export async function generateMetadata({
+  params
+}: PageProps<Params>): Promise<Metadata> {
+  const { meta } = getPostBySlug(params.slug)
   return {
     title: meta.title,
     description: `Blog post about ${meta.tags.join(', ')}`
   }
 }
 
-// 3) Sayfa component’i
-export default async function PostPage({ params: { slug } }: Props) {
-  // frontmatter ve ham içeriği al
-  const { meta, content } = getPostBySlug(slug)
-
-  // MDX string’ini derle
-  const mdxSource: MDXRemoteSerializeResult = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: []
-    }
-  })
+// 3) Sayfa component’i: PageProps<Params> ile tip uyumu sağlandı
+export default async function PostPage({
+  params
+}: PageProps<Params>) {
+  const { meta, content } = getPostBySlug(params.slug)
+  const mdxSource: MDXRemoteSerializeResult = await serialize(content)
 
   return (
-    <article className="prose prose-lg mx-auto py-16 dark:prose-invert">
+    <article className="container mx-auto flex flex-col items-center justify-center min-h-screen px-4 py-16">
       <h1>{meta.title}</h1>
       <time className="block text-sm text-gray-500 dark:text-gray-400 mb-6">
         {format(new Date(meta.date), 'LLL d, yyyy')}

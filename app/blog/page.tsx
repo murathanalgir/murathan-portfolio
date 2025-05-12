@@ -11,7 +11,7 @@ export default function BlogPage() {
   const posts: PostMeta[] = getAllPostsMeta()
 
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container mx-auto flex flex-col items-center justify-center min-h-screen px-4 py-16">
       <h1 className="text-3xl font-bold mb-8">Blog</h1>
       <ul className="space-y-6">
         {posts.map(post => (
