@@ -1,23 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // app/blog/[slug]/page.tsx
 import { Metadata } from 'next'
 import { format } from 'date-fns'
 import { serialize } from 'next-mdx-remote/serialize'
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import MdxRenderer from '@/components/mdxRenderer'
-import { getAllPostsMeta, getPostBySlug, PostMeta } from '@/lib/posts'
+import { getAllPostsMeta, getPostBySlug } from '@/lib/posts'
 
 type Params = { slug: string }
 
-// 1) Hangi slug’ların static generate edileceğini bildiriyoruz
+// hangi slug’ları önceden oluşturacağımız
 export function generateStaticParams(): Params[] {
   return getAllPostsMeta().map(post => ({ slug: post.slug }))
 }
 
-// 2) Dinamik metadata fonksiyonu
+// Next.js’in beklediği signature: params + searchParams
 export async function generateMetadata({
-  params
-}: { params: Params }): Promise<Metadata> {
+  params,
+  searchParams
+}: {
+  params: Params
+  searchParams: Record<string, any>
+}): Promise<Metadata> {
   const { meta } = getPostBySlug(params.slug)
   return {
     title: meta.title,
@@ -25,10 +30,14 @@ export async function generateMetadata({
   }
 }
 
-// 3) Sayfa component’i: params tipini inline verdik
+// page component’i için de aynı
 export default async function PostPage({
-  params
-}: { params: Params }) {
+  params,
+  searchParams
+}: {
+  params: Params
+  searchParams: Record<string, any>
+}) {
   const { meta, content } = getPostBySlug(params.slug)
   const mdxSource: MDXRemoteSerializeResult = await serialize(content)
 
