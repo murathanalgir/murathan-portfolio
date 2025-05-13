@@ -3,12 +3,14 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import HttpStatus from './httpStatus';
 
 export default function WeatherPage() {
   const [weather, setWeather] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
 
+  const [statusCode, setStatusCode] = useState<number | null>(null);
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -22,10 +24,12 @@ export default function WeatherPage() {
         if ((response.data as any).error) {
           throw new Error((response.data as any).error.info);
         }
+        setStatusCode(response.status)
         setWeather(response.data.current);
       } catch (err: any) {
         console.error('weatherError:', err);
         setError(err.message || 'The weather could not be loaded, please try again later.');
+        setStatusCode(err.response?.status ?? 500)
       } finally {
         setLoading(false);
       }
@@ -33,12 +37,15 @@ export default function WeatherPage() {
     fetchWeather();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen text-blue-600 text-xl">
-        <span className="animate-pulse">🔄 Loading weather…</span>
-      </div>
-    );
+  //     if (statusCode && statusCode !== 200) {
+  //       return <httpStatus status={statusCode} />
+  //     }
+      
+  // }
+
+  if (loading) return <div>Loading</div>
+  if (statusCode && statusCode !== 200) {
+    return <HttpStatus status={statusCode} />
   }
 
   if (error) {

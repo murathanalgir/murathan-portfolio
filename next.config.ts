@@ -14,4 +14,10 @@ module.exports = withMDX({
   pageExtensions: ['tsx', 'ts', 'md', 'mdx'],
   experimental: { mdxRs: true }
 })
+/** @type {import('next').NextConfig} */
+module.exports = {
+  images: {
+    domains: ['i.scdn.co'], // Spotify kapak URL’lerinin geldiği host
+  },
+}
 export default nextConfig;
