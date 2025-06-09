@@ -20,4 +20,16 @@ module.exports = {
     domains: ['i.scdn.co'], // Spotify kapak URL’lerinin geldiği host
   },
 }
+/** @type {import('next').NextConfig} */
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/test',      // kullanıcı tarayıcıda bu yolu açtığında…
+        destination: 'https://open.spotify.com/intl-tr/track/3b6DyYG5UWO1Tmq2Plx3e7?si=c72371ea48814d16',  // buraya yönlensin
+        permanent: false,          // kalıcı mı? (SEO için 308) geçici ise false (307)
+      },
+    ]
+  },
+}
 export default nextConfig;
