@@ -4,10 +4,11 @@ export default function Page() {
   return (
     <>
       <Heart />
-            <div classname="text-red">Cağla</div>
+            <div>Cağla</div>
 
     </>
   )
 }
+
 
 
