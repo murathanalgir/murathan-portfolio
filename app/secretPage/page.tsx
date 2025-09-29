@@ -4,11 +4,12 @@ export default function Page() {
   return (
     <>
       <Heart />
-            <div>dawla</div>
+            <div>çok ayıp ettin meltem!</div>
 
     </>
   )
 }
+
 
 
 
