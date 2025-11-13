@@ -4,7 +4,7 @@ import { getAll } from "@/lib/mdx";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const site = "https://murathan.space";
+  const site = "https://murathan.online";
   const posts = getAll("posts");
   const items = posts
     .map(p => {

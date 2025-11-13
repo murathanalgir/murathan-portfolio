@@ -157,3 +157,22 @@ main[data-cv-mode="on"] a {
     @apply font-medium;
   }
 }
+main[data-cv-mode="on"] {
+  box-shadow: none;
+}
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #020617;
+  }
+
+  main[data-cv-mode="on"] {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}

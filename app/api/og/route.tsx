@@ -79,7 +79,7 @@ export async function GET(req: Request) {
             fontSize: 28,
           }}
         >
-          <div>murathan.space</div>
+          <div>murathan.online</div>
           <div>github.com/murathanalgir</div>
         </div>
       </div>

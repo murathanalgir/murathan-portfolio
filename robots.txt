@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Sitemap: https://murathan.space/sitemap.xml
+Sitemap: https://murathan.online/sitemap.xml
