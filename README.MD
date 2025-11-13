@@ -1,26 +1,92 @@
-# Murathan's Portfolio
+# 🚀 Murathan Portfolio – Next.js 14 + TypeScript Modern Portfolio
 
-This repository contains the source code for my personal portfolio website. It showcases my projects, skills, and experience as a software developer.
+This repository contains the full personal portfolio project for **Murathan Algır**.  
+It includes a modern Next.js 14 architecture, an MDX blog system, an interactive terminal, CV mode, and a Discord-integrated contact form.
 
-## Technologies Used
+---
 
-*   **Frontend:** React, Next.js, Tailwind CSS
-*   **Deployment:** Vercel (or your chosen platform)
+# 🇹🇷 Türkçe Açıklama
 
-## Project Structure
+## 🎯 Özellikler
 
-(Provide a brief overview of the key directories and files in your project, e.g.:)
+### 🖥️ Modern Landing Page
+- Next.js 14 App Router mimarisi
+- Dark mode odaklı responsive tasarım
+- Daha iyi tipografi ve spacing
 
-*   `components/`: Reusable React components.
-*   `pages/`: Next.js pages (routing).
-*   `public/`: Static assets (images, fonts, etc.).
-*   `styles/`: Global styles and Tailwind CSS configuration.
-*   `data/`: (If applicable) Data files for projects or other content.
+### 👨‍💻 İnteraktif Terminal
+- Tab autocomplete
+- Boot animasyonu
+- `help`, `projects`, `blog`, `contact`, `exit` komutları
 
-## Customization
+### 📄 CV Mode
+- PDF için optimize edilmiş tek sayfalık CV görünümi
 
-You can easily customize the portfolio by modifying the following:
+### ✍️ MDX Blog Sistemi
+- `content/posts` altında MDX yazılar
+- Code highlight
+- Otomatik slug üretimi
 
-*   **Content:** Update the text and data in the relevant components and data files.
-*   **Styling:** Adjust the Tailwind CSS classes in the components or modify the global styles.
-*   **Projects:** Add or remove projects by updating the project data and creating new project components.
+### 🔔 Discord Webhook
+- İletişim formu mesajları direkt Discord kanalına düşer
+
+---
+
+# 🇺🇸 English Description
+
+## 🎯 Features
+
+### 🖥️ Modern Landing Page
+- Next.js 14 (App Router)
+- Dark-mode optimized design
+- Responsive layout and improved typography
+
+### 👨‍💻 Interactive Terminal
+- Tab autocomplete
+- Boot animation
+- Commands: `help`, `projects`, `blog`, `contact`, `exit`
+
+### 📄 CV Mode
+- Single-page CV layout optimized for printing/PDF
+
+### ✍️ MDX Blog System
+- MDX-based posts under `content/posts`
+- Code highlighting
+- Automatic slug generation
+
+### 🔔 Discord Webhook Integration
+- Contact form messages delivered directly into Discord
+
+---
+
+## 🚀 Development
+
+```
+npm install
+npm run dev
+```
+
+## 📦 Build
+
+```
+npm build
+npm start
+```
+
+## 📁 Folder Structure
+
+```
+app/
+  blog/
+  projects/
+  api/
+components/
+content/
+  posts/
+  projects/
+lib/
+```
+
+## 📄 License
+
+All rights reserved.
