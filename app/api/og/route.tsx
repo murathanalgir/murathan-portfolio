@@ -1,8 +1,6 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
 
 function clamp(str: string, max: number) {
   return str.length > max ? str.slice(0, max - 1) + "…" : str;
@@ -86,6 +84,9 @@ export async function GET(req: Request) {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      width: 1200,
+      height: 630,
+    }
   );
 }
