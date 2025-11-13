@@ -1,11 +1,13 @@
-import { notFound } from "next/navigation";
 import { getAll, getBySlug } from "@/lib/mdx";
+import { notFound } from "next/navigation";
 import { mdxToHtml } from "@/lib/renderMdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Prose from "@/components/Prose";
 
 export async function generateStaticParams() {
-  return getAll("posts").map(p => ({ slug: p.slug }));
+  return getAll("posts")
+    .filter(p => typeof p.slug === "string" && p.slug.length > 0)
+    .map(p => ({ slug: p.slug as string }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -14,7 +16,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return {};
   const desc = p.summary ?? "";
   const q = `title=${encodeURIComponent(p.title)}&desc=${encodeURIComponent(desc)}&badge=Blog`;
-
   return {
     title: `${p.title} | Blog`,
     description: desc,

@@ -113,11 +113,11 @@ async function notifyDiscord({
 
 export async function POST(req: NextRequest) {
   const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.ip ||
-    "0.0.0.0";
+  req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+  req.headers.get("x-real-ip") ||
+  "0.0.0.0";
 
-  const gate = limit(ip, 60_000, 5);
+const gate = limit(ip, 60_000, 5);
   if (!gate.ok) {
     return NextResponse.json(
       { error: "Too many requests", retryAfter: gate.retryAfter },
