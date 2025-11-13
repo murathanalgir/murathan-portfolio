@@ -37,20 +37,22 @@ export async function generateStaticParams() {
   return getAll("projects").map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = getBySlug("projects", slug);
+  const q = new URLSearchParams({
+    title: p.title,
+    desc: p.summary ?? "",
+    badge: "Case Study",
+  }).toString();
+
   return {
     title: `${p.title} | Case Study`,
     description: p.summary,
-    openGraph: { images: p.cover ? [p.cover] : [] },
+    openGraph: { images: [`/api/og?${q}`] },
+    twitter: { card: "summary_large_image", images: [`/api/og?${q}`] },
   };
 }
-
 export default async function Page({
   params,
 }: {
