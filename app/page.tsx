@@ -1,17 +1,19 @@
-import GithubShowcase from "@/components/GithubShowcase";
-import Intro from "@/components/Intro";
-import Weather from "@/components/weather";
-import RandomSong from '@/components/randomSong';
+import { getAll } from "@/lib/mdx";
+import { getPinnedRepos } from "@/lib/github";
+import HomeLanding from "@/components/HomeLanding";
 
-export default function Home() {
+export default async function Page() {
+  const [projects, posts, repos] = await Promise.all([
+    Promise.resolve(getAll("projects")),
+    Promise.resolve(getAll("posts")),
+    getPinnedRepos(),
+  ]);
+
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen p-8">
-    <div className="w-full max-w-lg flex flex-col items-center space-y-12">
-      <Intro  />
-      <RandomSong />
-      <Weather />
-      <GithubShowcase />
-    </div>
-   </section>
+    <HomeLanding
+      projects={projects}
+      posts={posts}
+      repos={repos}
+    />
   );
 }
